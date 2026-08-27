@@ -1,0 +1,17 @@
+@reference "tailwindcss";
+
+@layer components {
+  .input-field {
+    @apply border-2 border-white rounded-sm outline-none focus:ring-0;
+  }
+
+  .noSpinner {
+    -moz-appearance: textfield;
+  }
+
+  .noSpinner::-webkit-inner-spin-button,
+  .noSpinner::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
