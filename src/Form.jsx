@@ -16,9 +16,10 @@ const Form = () => {
 
         if (!isValid) {
 
+            // to focus input on the first field of error fileds
             const focusErr = formRef.current.querySelector("[aria-invalid = 'true']")
             focusErr?.focus()
-            
+
             return
         }
 
