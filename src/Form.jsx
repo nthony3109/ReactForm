@@ -9,17 +9,16 @@ const Form = () => {
     const dateRef = useRef(null);
     const formRef = useRef(null);
 
-    useEffect(()=>{
-         const focusErr = formRef.current.querySelector("[aria-invalid = 'true']")
-            focusErr?.focus()
-
-    },[err])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const isValid = validate()
 
         if (!isValid) {
+
+            const focusErr = formRef.current.querySelector("[aria-invalid = 'true']")
+            focusErr?.focus()
+            
             return
         }
 
