@@ -6,6 +6,8 @@ const ConditionalRendering = () => {
   { id: 2, name: "Phone", inStock: false },
   { id: 3, name: "Keyboard", inStock: true },
 ];
+
+// filtering here instead of doing it inside the return block
 const filter1 = products.filter((p) => p.inStock)
 const filter2 = products.filter((p) => !p.inStock)
 
