@@ -1,6 +1,7 @@
 const ConditionalRendering = () => {
 
-         const products = [
+  // an object to simulate the actual data from DB
+ const products = [
   { id: 1, name: "Laptop", inStock: true },
   { id: 2, name: "Phone", inStock: false },
   { id: 3, name: "Keyboard", inStock: true },
