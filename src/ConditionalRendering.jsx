@@ -10,6 +10,7 @@ const filter2 = products.filter((p) => !p.inStock)
 
   return (
     <>
+    {/* trying out condtional rendering as part of my react journey */}
      {
       filter1.map((f) => (
         <div key={f.id}>
