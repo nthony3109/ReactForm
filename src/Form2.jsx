@@ -1,9 +1,22 @@
 import styles from './form.module.css'
-import useTnxForm  from './hooks/useTnxForm'
+import reducer from './hooks/Reducer'
+import initialState from './hooks/InitialState'
+import { useReducer, useRef } from 'react'
 
 const Form2 = () => {
-    const [state,dispatch] = useReducer(reducer,initialState)
-    const{validate, err, formfields} = useTnxForm()
+    const [state,dispatch] = useReducer()
+    const formRef = useRef(null)
+    const dateRef = useRef(null)
+
+    const handleChange = (e) => {
+        const {name, value} = e.target
+
+        dispatch({
+            type: 'SET_FIELD',
+            field: name,
+            value: value
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -28,7 +41,7 @@ const Form2 = () => {
          <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-2 items-center">
                     <label className="block"> description</label>
                     
-                    <input type="text" aria-invalid={!!err.description} name="description" value={formValue.description} placeholder="enter short description" maxLength={50} onChange= {setValue}
+                    <input type="text" aria-invalid={!!err.description} name="description" value={state.values.description} placeholder="enter short description" maxLength={50} onChange= {setValue}
                     className="border-2 border-white rounded-sm" />
                     {err.description && (<p className="text-sm outline-none text-pink-600">{err.description}</p>)}
         
@@ -36,7 +49,7 @@ const Form2 = () => {
                     className="border-2  focus:border-green-200 focus:ring-0 outline-none border-white rounded-sm" />
                      {err.subject && (<p className="text-sm text-pink-600">{err.subject}</p>)}
         
-                    <select name="type" aria-invalid={!!err.type} value ={formValue.type} onChange= {setValue} placeholder="choose type" className="border-2 border-white outline-none rounded-sm" >
+                    <select name="type" aria-invalid={!!err.type} value ={state.values.type} onChange= {setValue} placeholder="choose type" className="border-2 border-white outline-none rounded-sm" >
                         <option value={""} >select the transaction Type</option>
                         <option value={"CREDIT"}>credit</option>
                         <option value={"DEBIT"}>debit</option>
