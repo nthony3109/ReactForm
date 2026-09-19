@@ -1,10 +1,27 @@
-import {validate} from "./validate"
+import styles from './form.module.css'
+import useTnxForm  from './hooks/useTnxForm'
 
 const Form2 = () => {
+    const [state,dispatch] = useReducer(reducer,initialState)
+    const{validate, err, formfields} = useTnxForm()
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const isValid = validate()
 
+        if (!isValid) {
+            dispatch({
+                type:'SET_ERRORS', 
+                errors: err
+            })
+            return
+        }
+
+        dispatch({type:'SET_IS_SUBMITTING'})
+
+        {// post API request here to submit the form data
+            }
+            
 
   return (
     <div>
