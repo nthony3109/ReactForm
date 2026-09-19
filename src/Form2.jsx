@@ -45,7 +45,7 @@ const Form2 = () => {
                     className="border-2 border-white rounded-sm" />
                     {err.description && (<p className="text-sm outline-none text-pink-600">{err.description}</p>)}
         
-                    <input type="text" name="subject" aria-invalid={!!err.subject} onChange= {setValue} value={formValue.subject} placeholder=" enter subject/topic"
+                    <input type="text" name="subject" aria-invalid={!!err.subject} onChange= {setValue} value={state.values.subject} placeholder=" enter subject/topic"
                     className="border-2  focus:border-green-200 focus:ring-0 outline-none border-white rounded-sm" />
                      {err.subject && (<p className="text-sm text-pink-600">{err.subject}</p>)}
         
@@ -62,7 +62,7 @@ const Form2 = () => {
                      {err.date && (<p className="text-sm text-pink-600">{err.date}</p>)}
         
                     <br />
-                    <input type="number" name="amount" aria-invalid={!!err.amount} value={formValue.amount} placeholder="enter amount" min={10} step={0.01}  onChange= {setValue}
+                    <input type="number" name="amount" aria-invalid={!!err.amount} value={state.values.amount} placeholder="enter amount" min={10} step={0.01}  onChange= {setValue}
                     className={`${styles.noSpinner} border-2 outline-none border-white rounded-sm`} />
                      {err.amount && (<p className="text-sm text-pink-600">{err.amount}</p>)}
         
