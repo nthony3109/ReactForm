@@ -8,7 +8,7 @@ const Form2 = () => {
     const formRef = useRef(null)
     const dateRef = useRef(null)
 
-    const handleChange = (e) => {
+    const setValue = (e) => {
         const {name, value} = e.target
 
         dispatch({
@@ -57,7 +57,7 @@ const Form2 = () => {
                      {err.type && (<p className="text-sm text-pink-600">{err.type}</p>)}
         
                     <br />
-                    <input type="date" ref={dateRef} aria-invalid={!!err.date} name="date" value={formValue.date} onChange={setValue} onClick={() => dateRef.current?.showPicker()}
+                    <input type="date" ref={dateRef} aria-invalid={!!err.date} name="date" value={state.values.date} onChange={setValue} onClick={() => dateRef.current?.showPicker()}
                     className="border-2 outline-none border-white rounded-sm"/>
                      {err.date && (<p className="text-sm text-pink-600">{err.date}</p>)}
         
