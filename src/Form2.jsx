@@ -5,7 +5,7 @@ import validateForm from './hooks/validateForm'
 import { useReducer, useRef } from 'react'
 
 const Form2 = () => {
-    const [state,dispatch] = useReducer(reducer,initialState)
+    const [state,dispatch] = useReducer (reducer,initialState)
     const formRef = useRef(null)
     const dateRef = useRef(null)
 
@@ -32,6 +32,11 @@ const Form2 = () => {
         dispatch({type:'SET_IS_SUBMITTING'})
 
         {// post API request here to submit the form data
+            console.log(state.isSubmitting);
+            
+            console.log("Form submitted successfully:", state.values)
+            dispatch({type:'SET_IS_SUBMITTED'})
+            console.log("submitted: " + state.isSubmitted)
             }
             
         }
@@ -53,7 +58,7 @@ const Form2 = () => {
                         <option value={"CREDIT"}>credit</option>
                         <option value={"DEBIT"}>debit</option>
                     </select>
-                     {state.errors.type && (<p className="text-sm text-pink-600">{state.errrors.type}</p>)}
+                     {state.errors.type && (<p className="text-sm text-pink-600">{state.errors.type}</p>)}
         
                     <br />
                     <input type="date" ref={dateRef} aria-invalid={!!state.errors.date} name="date" value={state.values.date} onChange={setValue} onClick={() => dateRef.current?.showPicker()}
@@ -66,7 +71,7 @@ const Form2 = () => {
                      {state.errors.amount && (<p className="text-sm text-pink-600">{state.errors.amount}</p>)}
         
                     <button type="submit" disabled={state.isSubmitting} className="border-2 border-white rounded-sm" > 
-                        {state.isSubmitting ? "Submitting..." : "Submit form"}
+                        {state.isSubmitting ? <small className=" text-amber-400">submitting...</small>: "Submit form"}
 
                     </button>
         
