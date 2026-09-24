@@ -1,10 +1,11 @@
 import styles from './form.module.css'
 import reducer from './hooks/Reducer'
 import initialState from './hooks/InitialState'
+import validateForm from './hooks/validateForm'
 import { useReducer, useRef } from 'react'
 
 const Form2 = () => {
-    const [state,dispatch] = useReducer()
+    const [state,dispatch] = useReducer(reducer,initialState)
     const formRef = useRef(null)
     const dateRef = useRef(null)
 
@@ -20,7 +21,14 @@ const Form2 = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        const errors = validateForm(state)
+        if (Object.keys(errors).length > 0) {
+            dispatch({
+                type: 'SET_ERRORS',
+                errors
+            })
+            return
+        }
         dispatch({type:'SET_IS_SUBMITTING'})
 
         {// post API request here to submit the form data
@@ -57,7 +65,10 @@ const Form2 = () => {
                     className={`${styles.noSpinner} border-2 outline-none border-white rounded-sm`} />
                      {err.amount && (<p className="text-sm text-pink-600">{err.amount}</p>)}
         
-                    <button type="submit" className="border-2 border-white rounded-sm" >submit form</button>
+                    <button type="submit" disabled={state.isSubmitting} className="border-2 border-white rounded-sm" > 
+                        {state.isSubmitting ? "Submitting..." : "Submit form"}
+
+                    </button>
         
         
                 </form>
