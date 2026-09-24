@@ -42,11 +42,11 @@ const Form2 = () => {
                     
                     <input type="text" aria-invalid={!!state.error.description} name="description" value={state.values.description} placeholder="enter short description" maxLength={50} onChange= {setValue}
                     className="border-2 border-white rounded-sm" />
-                    {err.description && (<p className="text-sm outline-none text-pink-600">{err.description}</p>)}
+                    {state.errors.description && (<p className="text-sm outline-none text-pink-600">{state.errors.description}</p>)}
         
-                    <input type="text" name="subject" aria-invalid={!!err.subject} onChange= {setValue} value={state.values.subject} placeholder=" enter subject/topic"
+                    <input type="text" name="subject" aria-invalid={!!state.errors.subject} onChange= {setValue} value={state.values.subject} placeholder=" enter subject/topic"
                     className="border-2  focus:border-green-200 focus:ring-0 outline-none border-white rounded-sm" />
-                     {err.subject && (<p className="text-sm text-pink-600">{err.subject}</p>)}
+                     {state.errors.subject && (<p className="text-sm text-pink-600">{state.errors.subject}</p>)}
         
                     <select name="type" aria-invalid={!!err.type} value ={state.values.type} onChange= {setValue} placeholder="choose type" className="border-2 border-white outline-none rounded-sm" >
                         <option value={""} >select the transaction Type</option>
