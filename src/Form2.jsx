@@ -20,28 +20,19 @@ const Form2 = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const isValid = validate()
-
-        if (!isValid) {
-            dispatch({
-                type:'SET_ERRORS', 
-                errors: err
-            })
-            return
-        }
 
         dispatch({type:'SET_IS_SUBMITTING'})
 
         {// post API request here to submit the form data
             }
             
-
+        }
   return (
     <div>
          <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-2 items-center">
                     <label className="block"> description</label>
                     
-                    <input type="text" aria-invalid={!!err.description} name="description" value={state.values.description} placeholder="enter short description" maxLength={50} onChange= {setValue}
+                    <input type="text" aria-invalid={!!state.error.description} name="description" value={state.values.description} placeholder="enter short description" maxLength={50} onChange= {setValue}
                     className="border-2 border-white rounded-sm" />
                     {err.description && (<p className="text-sm outline-none text-pink-600">{err.description}</p>)}
         
