@@ -2,7 +2,7 @@ import styles from './form.module.css'
 import reducer from './hooks/Reducer'
 import initialState from './hooks/InitialState'
 import validateForm from './hooks/validateForm'
-import { useReducer, useRef } from 'react'
+import { useReducer, useRef, useEffect} from 'react'
 
 const Form2 = () => {
     const [state,dispatch] = useReducer (reducer,initialState)
@@ -19,7 +19,7 @@ const Form2 = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const errors = validateForm(state)
         if (Object.keys(errors).length > 0) {
@@ -29,17 +29,30 @@ const Form2 = () => {
             })
             return
         }
-        dispatch({type:'SET_IS_SUBMITTING'})
+        dispatch({type:'SUBMIT_START'})
 
         {// post API request here to submit the form data
-            console.log(state.isSubmitting);
             
-            console.log("Form submitted successfully:", state.values)
-            dispatch({type:'SET_IS_SUBMITTED'})
-            console.log("submitted: " + state.isSubmitted)
-            }
-            
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating API request delay
+
+            console.log("Form submitted successfully obj below:", state.values)
+            dispatch({type:'SUBMIT_SUCCESS'})
+        
+            setTimeout(() => {
+                dispatch({type:'RESET_FORM'})
+            }, 1000)
+
         }
+     }
+     useEffect(() => {
+                console.log("isSubmitting changed:", state.isSubmitting);
+            }, [state.isSubmitting]);
+
+     useEffect(() => {
+                console.log("isSubmitted changed:", state.isSubmitted);
+            }, [state.isSubmitted]);
+
+
   return (
     <div>
          <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-2 items-center">
