@@ -40,7 +40,7 @@ const Form2 = () => {
          <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-2 items-center">
                     <label className="block"> description</label>
                     
-                    <input type="text" aria-invalid={!!state.error.description} name="description" value={state.values.description} placeholder="enter short description" maxLength={50} onChange= {setValue}
+                    <input type="text" aria-invalid={!!state.errors.description} name="description" value={state.values.description} placeholder="enter short description" maxLength={50} onChange= {setValue}
                     className="border-2 border-white rounded-sm" />
                     {state.errors.description && (<p className="text-sm outline-none text-pink-600">{state.errors.description}</p>)}
         
@@ -63,7 +63,7 @@ const Form2 = () => {
                     <br />
                     <input type="number" name="amount" aria-invalid={!!state.errors.amount} value={state.values.amount} placeholder="enter amount" min={10} step={0.01}  onChange= {setValue}
                     className={`${styles.noSpinner} border-2 outline-none border-white rounded-sm`} />
-                     {err.amount && (<p className="text-sm text-pink-600">{err.amount}</p>)}
+                     {state.errors.amount && (<p className="text-sm text-pink-600">{state.errors.amount}</p>)}
         
                     <button type="submit" disabled={state.isSubmitting} className="border-2 border-white rounded-sm" > 
                         {state.isSubmitting ? "Submitting..." : "Submit form"}
