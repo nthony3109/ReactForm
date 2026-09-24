@@ -31,18 +31,33 @@ const Form2 = () => {
         }
         dispatch({type:'SUBMIT_START'})
 
-        {// post API request here to submit the form data
+        // post API request here to submit the form data
             
             await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating API request delay
 
-            console.log("Form submitted successfully obj below:", state.values)
+            // console.log("Form submitted successfully obj below:", state.values)
+            try {
+                console.log("inside try");
+                    throw new Error("Something went wrong while submitting the form");
+                    
+                    
+                } catch (error) {
+                    console.log("inside catch");
+                     console.log("error:", error.message);
+                    dispatch({
+                        type: 'SUBMIT_ERROR',
+                        error: error.message
+                    });
+
+                    return;
+                }
             dispatch({type:'SUBMIT_SUCCESS'})
         
             setTimeout(() => {
                 dispatch({type:'RESET_FORM'})
             }, 1000)
 
-        }
+        
      }
      useEffect(() => {
                 console.log("isSubmitting changed:", state.isSubmitting);
