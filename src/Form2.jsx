@@ -1,23 +1,13 @@
 import styles from './form.module.css'
-import reducer from './hooks/Reducer'
-import initialState from './hooks/InitialState'
 import validateForm from './hooks/validateForm'
 import { useReducer, useRef, useEffect} from 'react'
+import useTnxForm2 from './hooks/useTnxForm2'
 
 const Form2 = () => {
-    const [state,dispatch] = useReducer (reducer,initialState)
     const formRef = useRef(null)
     const dateRef = useRef(null)
 
-    const setValue = (e) => {
-        const {name, value} = e.target
-
-        dispatch({
-            type: 'SET_FIELD',
-            field: name,
-            value: value
-        })
-    }
+    const {state, setValue, dispatch } = useTnxForm2()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,34 +25,39 @@ const Form2 = () => {
             
             await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating API request delay
 
-            // console.log("Form submitted successfully obj below:", state.values)
-            try {
-                console.log("inside try");
-                    throw new Error("Something went wrong while submitting the form");
-                    
-                    
-                } catch (error) {
-                    console.log("inside catch");
-                     console.log("error:", error.message);
-                    dispatch({
-                        type: 'SUBMIT_ERROR',
-                        error: error.message
-                    });
+            console.log("Form submitted successfully obj below:", state.values)
 
-                    return;
-                }
+            //try to simulate an error during form submission for testing purposes
+            // try {
+            //     console.log("inside try");
+            //         throw new Error("Something went wrong while submitting the form");
+                    
+                    
+            //     } catch (error) {
+            //         console.log("inside catch");
+            //          console.log("error:", error.message);
+            //         dispatch({
+            //             type: 'SUBMIT_ERROR',
+            //             error: error.message
+            //         });
+
+            //         return;
+            //     }
             dispatch({type:'SUBMIT_SUCCESS'})
         
+            //to delay the form reset after submission
             setTimeout(() => {
                 dispatch({type:'RESET_FORM'})
             }, 1000)
 
         
      }
+     // for testing purposes
      useEffect(() => {
                 console.log("isSubmitting changed:", state.isSubmitting);
             }, [state.isSubmitting]);
 
+            //for just testing purposes to see if the form is submitted successfully
      useEffect(() => {
                 console.log("isSubmitted changed:", state.isSubmitted);
             }, [state.isSubmitted]);
