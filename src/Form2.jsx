@@ -48,20 +48,20 @@ const Form2 = () => {
                     className="border-2  focus:border-green-200 focus:ring-0 outline-none border-white rounded-sm" />
                      {state.errors.subject && (<p className="text-sm text-pink-600">{state.errors.subject}</p>)}
         
-                    <select name="type" aria-invalid={!!err.type} value ={state.values.type} onChange= {setValue} placeholder="choose type" className="border-2 border-white outline-none rounded-sm" >
+                    <select name="type" aria-invalid={!!state.errors.type} value ={state.values.type} onChange= {setValue} placeholder="choose type" className="border-2 border-white outline-none rounded-sm" >
                         <option value={""} >select the transaction Type</option>
                         <option value={"CREDIT"}>credit</option>
                         <option value={"DEBIT"}>debit</option>
                     </select>
-                     {err.type && (<p className="text-sm text-pink-600">{err.type}</p>)}
+                     {state.errors.type && (<p className="text-sm text-pink-600">{state.errrors.type}</p>)}
         
                     <br />
-                    <input type="date" ref={dateRef} aria-invalid={!!err.date} name="date" value={state.values.date} onChange={setValue} onClick={() => dateRef.current?.showPicker()}
+                    <input type="date" ref={dateRef} aria-invalid={!!state.errors.date} name="date" value={state.values.date} onChange={setValue} onClick={() => dateRef.current?.showPicker()}
                     className="border-2 outline-none border-white rounded-sm"/>
-                     {err.date && (<p className="text-sm text-pink-600">{err.date}</p>)}
+                     {state.errors.date && (<p className="text-sm text-pink-600">{state.errors.date}</p>)}
         
                     <br />
-                    <input type="number" name="amount" aria-invalid={!!err.amount} value={state.values.amount} placeholder="enter amount" min={10} step={0.01}  onChange= {setValue}
+                    <input type="number" name="amount" aria-invalid={!!state.errors.amount} value={state.values.amount} placeholder="enter amount" min={10} step={0.01}  onChange= {setValue}
                     className={`${styles.noSpinner} border-2 outline-none border-white rounded-sm`} />
                      {err.amount && (<p className="text-sm text-pink-600">{err.amount}</p>)}
         
